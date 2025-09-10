@@ -1,7 +1,7 @@
 import express from "express";
 import cors from 'cors';
 import  dotenv from 'dotenv'
-import { userRouter } from "./router/user.js";
+import { mainRouter } from "./router/main.js";
 dotenv.config()
 
 const app = express();
@@ -10,8 +10,24 @@ app.use(cors());
 
 
 // API
-app.use("/api/v1/user",userRouter);
+app.use("/api/v1/",mainRouter);
 
+// Create project
+// Edit project
+// Usage 
+// Workplace list
+// project list 
+// project details
+// delete project
+
+// create workplace
+// delete workplace
+// get workplace
+
+// upload document
+// edit document
+// delete document
+// get document
 
 
 // health check

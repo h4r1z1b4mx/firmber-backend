@@ -10,3 +10,6 @@ export const SigninScheme = z.object({
     password:z.string()
 });
 
+export const WorkplaceSchema = z.object({
+    
+}); 
