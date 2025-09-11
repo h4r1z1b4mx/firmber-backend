@@ -2,9 +2,7 @@ import { Router } from "express";
 import { authMiddleware } from "../middleware.js";
 import { prismaClient } from "../db/index.js";
 import { parse } from "path";
-
 const router = Router();
-
 router.get('/', authMiddleware, async (req, res) => {
     // list the projects
     //@ts-ignore
@@ -17,7 +15,6 @@ router.get('/', authMiddleware, async (req, res) => {
     });
     res.json(projects);
 });
-
 router.get('/:projectId', authMiddleware, async (req, res) => {
     // To get the particular project
     //@ts-ignore
@@ -29,32 +26,29 @@ router.get('/:projectId', authMiddleware, async (req, res) => {
             id: parseInt(projectId),
             userId: id
         }
-
     });
     res.json(project);
 });
-
-router.post('/create', authMiddleware, async(req, res) => {
+router.post('/create', authMiddleware, async (req, res) => {
     //@ts-ignore
     const id = req.id;
     const body = req.body;
     await prismaClient.project.create({
-        data:{
+        data: {
             //@ts-ignore
-            name:body.name,
-            document_count:body.document_count,
+            name: body.name,
+            document_count: body.document_count,
             //@ts-ignore
-            userId:id,
+            userId: id,
             //@ts-ignore
-            workplaceId:body.workplaceId,
-            documents:{ create: [] }
+            workplaceId: body.workplaceId,
+            documents: { create: [] }
         }
     });
     res.json({
-        message:"Project created successfully"
+        message: "Project created successfully"
     });
 });
-
 router.post('/edit', authMiddleware, async (req, res) => {
     // edit the project like delete multiple documents
     //@ts-ignore
@@ -73,10 +67,8 @@ router.post('/edit', authMiddleware, async (req, res) => {
         message: "Project updated successfully"
     });
 });
-
 router.delete('/:projectId', authMiddleware, async (req, res) => {
     const { projectId } = req.params;
-
     await prismaClient.project.delete({
         where: {
             //@ts-ignore
@@ -87,7 +79,5 @@ router.delete('/:projectId', authMiddleware, async (req, res) => {
         message: "Project deleted successfully"
     });
 });
-
-
-
 export const projectRouter = router;
+//# sourceMappingURL=project.js.map

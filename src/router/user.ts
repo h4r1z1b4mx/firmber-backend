@@ -8,13 +8,40 @@ const router = Router();
 
 router.use('/auth', authRouter);
 router.get('/', authMiddleware,async (req, res) => {
+
     //@ts-ignore
     const id = req.id;
     const user = await prismaClient.user.findFirst({
         where:{
             id, 
         }, select:{
-            email:true
+            email:true,
+            name:true,
+            workplaces:{
+                select:{
+                    id:true,
+                    name:true,
+                    createdAt:true, 
+                    projects:{
+                        select:{
+                             id:true,
+                            name:true,
+                            document_count:true,
+                            createdAt:true,
+                            workplaceId:true,
+                            documents:{
+                                select:{
+                                    id:true,
+                                    name:true,
+                                    s3_link:true,
+                                    document_type:true,
+                                    projectId:true
+                                }
+                            }       
+                        }
+                    }   
+                }
+            }
         }   
     });
     res.json({

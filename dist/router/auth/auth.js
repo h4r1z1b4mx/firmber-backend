@@ -28,7 +28,14 @@ router.post("/signup", async (req, res) => {
             //@ts-ignore
             email: parsedData.data?.email,
             //@ts-ignore
-            password: parsedData.data?.password
+            password: parsedData.data?.password,
+            //create a default workplace here
+            workplaces: {
+                create: {
+                    name: "Personal Workplace",
+                    projects: { create: [] }
+                }
+            }
         }
     });
     res.json({
