@@ -52,6 +52,7 @@ router.post(
   authMiddleware,
   upload.single("file"),
   async (req, res) => {
+   console.log("Hi there");
     try {
       // @ts-ignore
       const id = req.id;

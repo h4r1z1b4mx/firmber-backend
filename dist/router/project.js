@@ -25,6 +25,23 @@ router.get('/:projectId', authMiddleware, async (req, res) => {
             //@ts-ignore
             id: parseInt(projectId),
             userId: id
+        }, select: {
+            id: true,
+            name: true,
+            document_count: true,
+            createdAt: true,
+            documents: {
+                select: {
+                    id: true,
+                    name: true,
+                }
+            },
+            workplace: {
+                select: {
+                    id: true,
+                    name: true
+                }
+            }
         }
     });
     res.json(project);
